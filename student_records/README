@@ -1,0 +1,4 @@
+Scripts for analyzing student academic records.
+
+Each script will import the PML interactive API, but should otherwise be 
+stand-alone.
