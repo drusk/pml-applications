@@ -8,7 +8,17 @@ at predicting student performance.
 from pml.api import *
 
 def knn_accuracy_tests(training, testing):
-    print "<KNN results>"
+    print_line_break()
+    print "KNN accuracy test:"
+    print "k\tAccuracy"
+    print "-\t--------"
+    
+    # Test the accuracy for k values of 3, 4, 5
+    for k in range(3, 6):
+        classifier = Knn(training, k=k)
+        results = classifier.classify_all(testing)
+        accuracy = results.compute_accuracy()
+        print "%d\t%2.5f" % (k, 100 * accuracy)
     
 def naive_bayes_accuracy_tests(training, testing):
     print "<Naive Bayes results>"
@@ -28,6 +38,9 @@ def main():
     knn_accuracy_tests(training, testing)
     naive_bayes_accuracy_tests(training, testing)
     decision_tree_accuracy_tests(training, testing)
+
+def print_line_break():
+    print "*" * 50
     
 def load_data():
     """
@@ -37,9 +50,10 @@ def load_data():
     # Python standard library imports
     import sys
     import os.path
-    
+
     if len(sys.argv) != 2:
-        print "Usage: python %s <file_path>" % os.path.basename(__file__) 
+        print "Usage: python %s <file_path>" % os.path.basename(__file__)
+        sys.exit(1)
         
     filename = sys.argv[1]
     
