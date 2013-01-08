@@ -15,15 +15,19 @@ def knn_accuracy_tests(training, testing):
     
     # Test the accuracy for k values of 3, 4, 5
     for k in range(3, 6):
-        classifier = Knn(training, k=k)
-        results = classifier.classify_all(testing)
-        accuracy = results.compute_accuracy()
+        accuracy = Knn(training, k=k).classify_all(testing).compute_accuracy()
         print "%d\t%2.5f" % (k, 100 * accuracy)
     
 def naive_bayes_accuracy_tests(training, testing):
-    print "<Naive Bayes results>"
+    print_line_break()
+    print "Naive Bayes accuracy test:"
+    
+    accuracy = NaiveBayes(training).classify_all(testing).compute_accuracy()
+    print "%2.5f" % accuracy
     
 def decision_tree_accuracy_tests(training, testing):
+    print_line_break()
+    print "Decision tree accuracy test:"
     print "<Decision Tree results>"
 
 def main():
