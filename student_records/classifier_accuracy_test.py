@@ -14,20 +14,20 @@ from pml.api import *
 def knn_accuracy_tests(training, testing):
     print_line_break()
     print "KNN accuracy test:"
-    print "k\tAccuracy (%)"
+    print "k\tAccuracy"
     print "-\t--------"
     
     # Test the accuracy for k values of 3, 4, 5
     for k in range(3, 6):
         accuracy = Knn(training, k=k).classify_all(testing).compute_accuracy()
-        print "%d\t%2.5f" % (k, 100 * accuracy)
+        print "%d\t%2.5f %%" % (k, 100 * accuracy)
     
 def naive_bayes_accuracy_tests(training, testing):
     print_line_break()
     print "Naive Bayes accuracy test:"
     
     accuracy = NaiveBayes(training).classify_all(testing).compute_accuracy()
-    print "%2.5f" % (100 * accuracy)
+    print "%2.5f %%" % (100 * accuracy)
     
 def decision_tree_accuracy_tests(training, testing):
     print_line_break()
