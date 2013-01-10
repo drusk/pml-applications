@@ -10,7 +10,6 @@ probation (s) but still passed, or failed (f).
 # Import the PML interactive api so that we can program like we were at 
 # the PML shell.
 from pml.api import *
-from pml.supervised.decision_trees import DecisionTree
 
 def knn_accuracy_tests(training, testing):
     print_line_break()
