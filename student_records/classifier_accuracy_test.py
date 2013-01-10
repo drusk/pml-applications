@@ -10,6 +10,7 @@ probation (s) but still passed, or failed (f).
 # Import the PML interactive api so that we can program like we were at 
 # the PML shell.
 from pml.api import *
+from pml.supervised.decision_trees import DecisionTree
 
 def knn_accuracy_tests(training, testing):
     print_line_break()
@@ -32,11 +33,21 @@ def naive_bayes_accuracy_tests(training, testing):
 def decision_tree_accuracy_tests(training, testing):
     print_line_break()
     print "Decision tree accuracy test:"
-    print "<Decision Tree results>"
+    
+    # bin grades of 0-3 as low, 4-6 as mid, 7-9 as high
+    training.bin("*", [4, 7], bin_names=["low", "mid", "high"])
+    testing.bin("*", [4, 7], bin_names=["low", "mid", "high"])
+    
+    tree = DecisionTree(training)
+    accuracy = tree.classify_all(testing).compute_accuracy()    
+    print "%2.5f %%" % (100 * accuracy)
 
 def main():
     # The original data set.
     data = load_data()
+    
+    # Fill in missing values with the average for that course.
+    data.fill_missing_with_feature_means()
     
     # Count successful and probation students as one group (s)
     # Comment this out to try and distinguish all 3 groups (s, p, f)
