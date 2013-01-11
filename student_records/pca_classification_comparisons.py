@@ -11,10 +11,10 @@ def compare_knn(training, testing, pca_training, pca_testing):
     print "Comparing KNN accuracy with and without PCA"
     
     print "Without PCA:"
-    print Knn(training, k=5).classify_all(testing).compute_accuracy()
+    print Knn(training, k=3).classify_all(testing).compute_accuracy()
     
     print "With PCA"
-    print Knn(pca_training, k=5).classify_all(pca_testing).compute_accuracy()
+    print Knn(pca_training, k=3).classify_all(pca_testing).compute_accuracy()
 
 def compare_naive_bayes(training, testing, pca_training, pca_testing):
     util.print_line_break()
@@ -40,8 +40,8 @@ def main():
     num_components = recommend_num_components(data, min_pct_variance=0.95)
     pca_data = pca(data, num_components)
     
-    training, testing = data.split(0.7)
-    pca_training, pca_testing = pca_data.split(0.7)
+    training, testing = data.split(0.5, using_labels=True)
+    pca_training, pca_testing = pca_data.split(0.5, using_labels=True)
     
     compare_knn(training, testing, pca_training, pca_testing)
     compare_naive_bayes(training, testing, pca_training, pca_testing)

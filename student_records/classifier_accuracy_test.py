@@ -53,10 +53,9 @@ def main():
     # Count successful and probation students as one group (s)
     # Comment this out to try and distinguish all 3 groups (s, p, f)
     data.combine_labels(["s", "p"], "s")
-    
-    # Randomly split 70% of samples into the training set, and use the 
-    # remaining 30% for a testing data set.
-    training, testing = data.split(0.7, random=True)
+
+    # Take a 50-50 split
+    training, testing = data.split(0.5, using_labels=True)
     
     # Run tests for each classifier to determine the accuracy it can achieve.
     knn_accuracy_tests(training, testing)

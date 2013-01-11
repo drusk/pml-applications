@@ -8,8 +8,8 @@ from pml.api import *
 import util
 
 def get_knn_accuracy(data):
-    training, testing = data.split(0.7)
-    return Knn(training, k=5).classify_all(testing).compute_accuracy()
+    training, testing = data.split(0.5, using_labels=True)
+    return Knn(training, k=3).classify_all(testing).compute_accuracy()
 
 def main():
     # The original data set.
