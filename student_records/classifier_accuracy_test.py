@@ -20,8 +20,8 @@ def knn_accuracy_tests(training, testing):
     print "k\tAccuracy"
     print "-\t--------"
     
-    # Test the accuracy for k values of 3, 4, 5
-    for k in range(3, 6):
+    # Test the accuracy for k values of 3, 4, 5, 6, 7, 8, 9
+    for k in range(3, 10):
         accuracy = Knn(training, k=k).classify_all(testing).compute_accuracy()
         print "%d\t%2.5f %%" % (k, 100 * accuracy)
     
