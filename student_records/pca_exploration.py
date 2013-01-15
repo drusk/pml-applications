@@ -15,6 +15,16 @@ def examine_principal_components(dataset):
     print "Recommended number of principal components for 95% variance:"
     print recommend_num_components(dataset, min_pct_variance=0.95)
 
+def pca_find_important_features(dataset):
+    # The weight matrix that is used to transform the original data 
+    # to the reduced data can be used to see which features are most 
+    # important.  The features with the largest magnitude weight have 
+    # the largest impact on the reduced data.
+    
+    util.print_line_break()
+    print "First principal component impacts (absolute value of weight):"
+    print pca(dataset, 2).get_first_component_impacts()
+
 def main():
     # The original data set.
     data = util.load_data()
@@ -27,6 +37,8 @@ def main():
     data.combine_labels(["s", "p"], "s")
     
     examine_principal_components(data)
+    
+    pca_find_important_features(data)
 
 if __name__ == "__main__":
     main()
